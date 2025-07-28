@@ -1,4 +1,4 @@
-# Controle de Plano de Testes
+# Beyond Test
 
 ![Status](https://img.shields.io/badge/status-ativo-brightgreen)
 
