@@ -31,7 +31,7 @@ const USER_SETTINGS_KEY = 'testAppUserSettings';
 
 // --- CHAVE DE API GLOBAL ---
 // INSIRA SUA CHAVE DE API DO GOOGLE AQUI. ELA DEVE COMEÇAR COM "AIzaSy..."
-const GOOGLE_AI_API_KEY = "AIzaSyC4tpuuELoEuuiqlhxwYZT_UrScgbulmKg";
+const GOOGLE_AI_API_KEY = "AIzaSyCLCk4E7pW34K4LmsK3QCVKofA2FxYP-ik";
 
 let userSettings = {
     authorName: 'Anônimo',

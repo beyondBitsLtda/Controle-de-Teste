@@ -1,13 +1,11 @@
-# Beyond Test
+# Controle de Plano de Testes
 
 ![Status](https://img.shields.io/badge/status-ativo-brightgreen)
 
 Uma aplicação web client-side interna para gerenciar, documentar e acompanhar casos de teste de software.
 
-<p align="center">
- <img width="1000" src="print.png" alt="icon"/>
-</p>
-
+![Captura de Tela da Aplicação](https://i.imgur.com/link-para-sua-imagem.png)
+*(Recomendação: Substitua o link acima por uma captura de tela real da sua aplicação)*
 
 ## 📜 Sobre o Projeto
 
