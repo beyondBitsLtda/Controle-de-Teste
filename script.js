@@ -4481,28 +4481,3 @@ function executeSelectedRunsExport(macroId) {
     closeModal('export-modal');
 }
 
-import { collection, addDoc, getDocs } 
-from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
-
-async function testarFirebase() {
-    console.log("🔍 Testando conexão com Firebase...");
-
-    try {
-        // Criar um documento de teste
-        const ref = await addDoc(collection(window.db, "teste_conexao"), {
-            funcionando: true,
-            timestamp: new Date()
-        });
-
-        console.log("🔥 Documento criado! ID:", ref.id);
-
-        // Ler documentos da coleção
-        const snapshot = await getDocs(collection(window.db, "teste_conexao"));
-        console.log("📚 Documentos lidos:", snapshot.size);
-    } 
-    catch (erro) {
-        console.error("❌ Firebase NÃO conectou!", erro);
-    }
-}
-
-testarFirebase();
