@@ -579,9 +579,10 @@
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
 
-      // Se for usar Firestore:
-      // const db = getFirestore(app);
-      // window.db = db; // deixa disponível pro script.js
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+    const db = getFirestore(app);
+    window.db = db;
     </script>
 
     <!-- SEU JS, DEPOIS DO FIREBASE -->
