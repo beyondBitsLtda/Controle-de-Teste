@@ -278,10 +278,13 @@ function getGeminiApiKey(showAlert = true) {
     return isConfigured ? key : null;
 }
 
+const GEMINI_MODEL = 'gemini-1.5-flash-latest';
+
 function buildGeminiEndpoint(showAlert = true) {
     const key = getGeminiApiKey(showAlert);
     if (!key) return null;
-    return `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${key}`;
+    // Usa a versão v1 da API, que fornece o alias "-latest" para os modelos atuais.
+    return `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent?key=${key}`;
 }
 
 function showControlPanel() {
