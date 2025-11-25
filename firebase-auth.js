@@ -10,7 +10,12 @@ import {
 import { firebaseApp } from "./firebase-init.js";
 
 // Recupera a instância do app inicializada em firebase-init.js para reutilizar a mesma configuração do projeto.
-const auth = getAuth(firebaseApp);
+let auth;
+try {
+  auth = getAuth(firebaseApp);
+} catch (error) {
+  console.error("[Firebase] Falha ao inicializar autenticação:", error);
+}
 
 // Seletores do DOM usados no painel de login/cadastro.
 const registerForm = document.getElementById("register-form");
@@ -21,6 +26,22 @@ const registerFeedback = document.getElementById("register-feedback");
 const loginFeedback = document.getElementById("login-feedback");
 const authScreen = document.getElementById("auth-screen");
 const appShell = document.getElementById("app-shell");
+
+// Garante que a tela de autenticação fique visível caso algo impeça a inicialização do Firebase.
+if (!auth) {
+  if (registerFeedback) {
+    registerFeedback.textContent =
+      "Configuração do Firebase ausente ou inválida. Verifique o firebase-init.js.";
+    registerFeedback.style.color = "red";
+  }
+  if (loginFeedback) {
+    loginFeedback.textContent =
+      "Não foi possível carregar o Firebase Auth. Revise as credenciais.";
+    loginFeedback.style.color = "red";
+  }
+  authScreen?.classList.remove("hidden");
+  appShell?.classList.add("hidden");
+}
 
 function formatAuthError(error) {
   const code = error?.code || "";
@@ -62,6 +83,13 @@ registerForm?.addEventListener("submit", async (event) => {
   const email = document.getElementById("register-email").value.trim();
   const password = document.getElementById("register-password").value;
 
+  if (!auth) {
+    registerFeedback.textContent =
+      "Firebase Auth não inicializado. Confira as credenciais do projeto.";
+    registerFeedback.style.color = "red";
+    return;
+  }
+
   try {
     // Cria o usuário com segurança no backend do Firebase.
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
@@ -83,6 +111,13 @@ loginForm?.addEventListener("submit", async (event) => {
   const email = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-password").value;
 
+  if (!auth) {
+    loginFeedback.textContent =
+      "Firebase Auth não inicializado. Confira as credenciais do projeto.";
+    loginFeedback.style.color = "red";
+    return;
+  }
+
   try {
     await signInWithEmailAndPassword(auth, email, password);
     loginFeedback.textContent = "✅ Login realizado";
@@ -95,6 +130,7 @@ loginForm?.addEventListener("submit", async (event) => {
 
 // Permite que o usuário encerre a sessão de forma explícita.
 logoutBtn?.addEventListener("click", async () => {
+  if (!auth) return;
   try {
     await signOut(auth);
   } catch (error) {
@@ -103,11 +139,16 @@ logoutBtn?.addEventListener("click", async () => {
 });
 
 // Observa mudanças na sessão para manter o painel sincronizado e seguro.
-onAuthStateChanged(auth, (user) => {
-  updateAuthUI(user);
-  if (!user) {
-    // Limpa feedbacks quando o usuário desconecta.
-    registerFeedback.textContent = "";
-    loginFeedback.textContent = "";
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  updateAuthUI(auth?.currentUser || null);
+  if (!auth) return;
+
+  onAuthStateChanged(auth, (user) => {
+    updateAuthUI(user);
+    if (!user) {
+      // Limpa feedbacks quando o usuário desconecta.
+      registerFeedback.textContent = "";
+      loginFeedback.textContent = "";
+    }
+  });
 });
