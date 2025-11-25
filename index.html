@@ -17,21 +17,31 @@
         <svg class="triangle-3" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="100,0 100,100 0,100"></polygon></svg>
     </div>
 
-    <div class="container">
-       
-        <div class="header">
-             <img src="logo.png" alt="Logo da Empresa" class="header-logo">
-           
-            <div class="header-text">
-                
-                <h1>Controle de Plano de Testes</h1>
-                <p>Gerenciamento de Casos de Teste e Tickets</p>
+    <div id="app-shell" class="app-shell">
+        <div class="container">
+
+            <div class="header">
+                 <img src="logo.png" alt="Logo da Empresa" class="header-logo">
+
+                <div class="header-text">
+
+                    <h1>Controle de Plano de Testes</h1>
+                    <p>Gerenciamento de Casos de Teste e Tickets</p>
+                </div>
             </div>
-        </div>
 
-        <div class="content-wrapper">
+            <div class="content-wrapper">
 
-            <aside class="sidebar">
+                <aside class="sidebar">
+                    <div class="auth-card">
+                        <h2>Autenticação</h2>
+                        <p id="auth-status" class="auth-status">Verificando sessão...</p>
+                        <div class="auth-actions">
+                            <button id="go-auth-btn" class="btn btn-import" style="width: 100%;">Ir para login/cadastro</button>
+                            <button id="logout-btn" class="btn btn-clear-logs" style="width: 100%; display: none;">Sair</button>
+                        </div>
+                    </div>
+
                 <h2>Gerenciar Projetos</h2>
                 <button class="btn" style="background-color: #007bff;" onclick="showMacroProjectManagementModal()">🏢 Gerenciar Macro-Projetos</button>
                 <button class="btn btn-history" onclick="showSaveRunModal()">💾 Salvar Execução</button>
@@ -139,6 +149,8 @@
             <button class="btn btn-action-discrete btn-warning" id="filter-failed-button" onclick="filterFailedTests()" title="Mostrar Apenas Reprovados">⚠️</button>
             <button class="btn btn-action-discrete btn-add" onclick="addNewTestCase()" title="Adicionar Novo Caso de Teste">➕</button>
         </div>
+    </div>
+
     </div>
 
     <div id="email-modal" class="modal-overlay" onclick="closeModalIfOverlay(event, 'email-modal')">
@@ -560,6 +572,7 @@
     </div>
 
     <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="session-guard.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
