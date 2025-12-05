@@ -47,6 +47,24 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+}
+
+body, input, select, textarea, button {
+    color: var(--text);
+}
+
+h1, h2, h3, h4 {
+    color: var(--text);
+    letter-spacing: 0.01em;
+}
+
+p, li, label, span, small {
+    color: var(--text);
+}
+
+::placeholder {
+    color: var(--muted);
 }
 
 .container {
@@ -532,8 +550,8 @@ body {
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 
 .project-item.status-ativo { border-left-color: var(--cor-status-aprovado); }
-.project-item.status-finalizado { border-left-color: var(--cor-botao-funcao); background-color: #f1f3f5; }
-.project-item.status-finalizado .project-item-info strong { text-decoration: line-through; color: var(--cor-texto-claro); }
+.project-item.status-finalizado { border-left-color: var(--cor-botao-funcao); background-color: rgba(37, 99, 235, 0.08); color: var(--text); }
+.project-item.status-finalizado .project-item-info strong { text-decoration: line-through; color: var(--muted); }
 .project-item.status-inativo { border-left-color: var(--cor-aviso); opacity: 0.7; }
 .project-item.status-inativo:hover { opacity: 1; }
 
@@ -934,25 +952,26 @@ body {
     flex-wrap: wrap;
 }
 .btn-tool {
-    background-color: #f0f2f5;
-    border: 1px solid #ccc;
-    color: #333;
+    background-color: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
     width: 36px;
     height: 36px;
     padding: 0;
     border-radius: 8px;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 .btn-tool:hover {
-    background-color: #e0e4e8;
-    border-color: #999;
+    background-color: rgba(148, 163, 184, 0.12);
+    border-color: var(--primary-soft);
 }
 .btn-tool.active {
-    background-color: var(--cor-primaria);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(29, 78, 216, 0.9));
     color: white;
-    border-color: var(--cor-primaria);
+    border-color: rgba(37, 99, 235, 0.35);
 }
 .color-palette {
     display: flex;
@@ -1002,21 +1021,21 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 15px;
-    border-bottom: 1px solid #f1f3f5;
+    border-bottom: 1px solid var(--border);
 }
 .comment-step-item:last-child {
     border-bottom: none;
 }
 
 .comment-step-item.active-comment {
-    background-color: #e7f1ff;
+    background-color: var(--primary-soft);
     border-radius: 6px;
 }
 
 .comment-step-text {
     flex-grow: 1;
     font-size: 1rem;
-    color: var(--cor-texto-escuro);
+    color: var(--text);
 }
 
 .comment-step-text .author {
@@ -1028,8 +1047,8 @@ body {
 }
 
 .comment-step-time {
-    background-color: #e7f1ff;
-    color: #0056b3;
+    background-color: rgba(37, 99, 235, 0.18);
+    color: var(--text);
     font-weight: bold;
     padding: 5px 10px;
     border-radius: 12px;
@@ -1037,10 +1056,13 @@ body {
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
-    transition: background-color 0.2s;
+    border: 1px solid var(--border);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 .comment-step-time:hover {
-    background-color: #cce0ff;
+    background-color: rgba(37, 99, 235, 0.25);
+    color: #dce9ff;
+    border-color: rgba(37, 99, 235, 0.4);
 }
 
 #comment-reply-section {
@@ -1220,7 +1242,7 @@ body {
 }
 .assistant-message.thinking {
     font-style: italic;
-    color: #6c757d;
+    color: var(--muted);
 }
 
 .chat-input-container {
